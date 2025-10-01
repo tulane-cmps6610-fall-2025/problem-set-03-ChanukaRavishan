@@ -249,14 +249,32 @@ def parens_match_dc_helper(mylist):
     """
     ###TODO
     # base cases
+
+    if len(mylist) == 0:
+        return (0,0)
+    if len(mylist) == 1:
+        if mylist[0] == '(':
+            return (0,1)
+        elif mylist[0] == ')':
+            return (1,0)
+        else:
+            return (0,0)
     
-    # recursive case
-    # - first solve subproblems
+    # recursive case: split into halves
+    mid = len(mylist)//2
+    R1, L1 = parens_match_dc_helper(mylist[:mid])
+    R2, L2 = parens_match_dc_helper(mylist[mid:])
     
     # - then compute the solution (R,L) using these solutions, in constant time.
     
     ###
-    
+
+    z = min(L1, R2)
+    R = R1 + R2 - z
+    L = L1 + L2 - z
+
+    return (R, L)
+        
 
 def test_parens_match_dc():
     assert parens_match_dc(['(', ')']) == True

@@ -145,7 +145,18 @@ So **$S(n) = O(logn)$**
 
 - **3f.**
 
+    $W(n) = 2W(n/2) + O(1)$. 
+    
+    This is leaf dominated as work of first level is one while the second level is two
+    
+    Number of leaves is $n^{log_2(2)}$ = n. 
+    
+    Therefore **$W(n) = O(n)$**
 
+
+    $S(n) = S(n/2) + O(1)$ 
+    
+    Therefore **$S(n) = O(logn)$**.
 
 
 - **4a.**
