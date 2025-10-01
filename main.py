@@ -98,9 +98,7 @@ def parens_match_iterative(mylist):
     >>>parens_match_iterative(['('])
     False
     """
-    ### TODO
     return iterate(parens_update, 0, mylist) == 0
-    ###
 
 
 def parens_update(current_output, next_input):
@@ -115,8 +113,14 @@ def parens_update(current_output, next_input):
     Returns:
       the updated value of `current_output`
     """
-    ###TODO
-    ###
+    if current_output == -1:
+        return current_output
+    elif next_input=='(':
+        return current_output + 1
+    elif next_input==')':
+        return current_output - 1
+    else:
+        return current_output
 
 
 def test_parens_match_iterative():
@@ -128,6 +132,7 @@ def test_parens_match_iterative():
     assert parens_match_iterative(['(', '(', ')']) == False
     assert parens_match_iterative(['(', 'a', ')', ')', '(']) == False
     assert parens_match_iterative([]) == True
+    print("parens_match_iterative tests have passed")
 
 
 #### Scan solution
@@ -149,8 +154,23 @@ def parens_match_scan(mylist):
     False
     
     """
-    ###TODO
-    ###
+    mapped = []
+    for a in mylist:
+        mapped.append(paren_map(a))
+        
+    result = scan(lambda a,b: a+b, 0, mapped)
+    prefix_sums = result[0]
+    total = result[1]
+    
+    min_prefix = float("inf") # initializng to infinity
+    for p in prefix_sums:
+        if p < min_prefix:
+            min_prefix = p
+    
+    if total == 0 and min_prefix >= 0:
+        return True
+    else:
+        return False
 
 def scan(f, id_, a):
     """

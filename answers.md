@@ -107,22 +107,40 @@ So **$S(n) = O(logn)$**
         // output is a sequence containing each distinct element of A0∪...∪Am
 
         spec:
-        - ∀ element x in A_0∪...∪Am, x appears in B iff x appears in at least one Ai
-        - Each distinct x appears exactly once in B
-        - Order of B is arbitrary (not required to match input order)
+        - ∀ element x in A_0...Am, x appear in B iff x is in atleast on A_i
+        - return B (order does not matter)
 
     ''' 
 
+    **Work: $O(n)$** 
+    
+    **Span: $O(logn)$**
+
+- **2c.**
+
+    In dedup where we did order preserving sequential operations didnt help much.
+
+    But in Multi-dedup Sequence operations such as like flatten and reduce are useful.
 
 - **3b.**
 
 
+    $W(n) = W(n-1) + O(1)$ 
+    
+    The work is balanced. and Since a constant work is done at every step work: $O(n)$.
+
+    $S(n) = S(n-1) + O(1)$ = $O(n)$
 
 
 - **3d.**
 
+    $W(n) = W(n/2) + cn$. 
+    
+    This work is root dominated
+    
+    Therefore, $W(n) = O(n)$
 
-
+    $S(n) = S(n/2) + 1$ : $S(n) = O(logn)$
 
 
 - **3f.**
