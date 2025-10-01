@@ -8,16 +8,6 @@ import math
 ### PART 1: SEARCHING UNSORTED LISTS
 
 # search an unordered list L for a key x using iterate
-def isearch(L, x):
-    ###TODO
-    ###
-
-def test_isearch():
-    assert isearch([1, 3, 5, 4, 2, 9, 7], 2) == (2 in [1, 3, 5, 4, 2, 9, 7])
-    assert isearch([1, 3, 5, 2, 9, 7], 7) == (7 in [1, 3, 5, 2, 9, 7])
-    assert isearch([1, 3, 5, 2, 9, 7], 99) == (99 in [1, 3, 5, 2, 9, 7])
-    assert isearch([], 2) == (2 in [1, 3, 5])
-
 
 def iterate(f, x, a):
     # done. do not change me.
@@ -26,16 +16,20 @@ def iterate(f, x, a):
     else:
         return iterate(f, f(x, a[0]), a[1:])
 
-# search an unordered list L for a key x using reduce
-def rsearch(L, x):
-    ###TODO
-    ###
 
-def test_rsearch():
-    assert rsearch([1, 3, 5, 4, 2, 9, 7], 2) == (2 in [1, 3, 5, 4, 2, 9, 7])
-    assert rsearch([1, 3, 5, 2, 9, 7], 7) == (7 in [1, 3, 5, 2, 9, 7])
-    assert rsearch([1, 3, 5, 2, 9, 7], 99) == (99 in [1, 3, 5, 2, 9, 7])
-    assert rsearch([], 2) == (2 in [1, 3, 5])
+def isearch(L, x):
+
+    def check(found, current):
+        return found or (current == x)
+    return iterate(check, False, L)
+
+
+def test_isearch():
+    assert isearch([1, 3, 5, 4, 2, 9, 7], 2) == (2 in [1, 3, 5, 4, 2, 9, 7])
+    assert isearch([1, 3, 5, 2, 9, 7], 7) == (7 in [1, 3, 5, 2, 9, 7])
+    assert isearch([1, 3, 5, 2, 9, 7], 99) == (99 in [1, 3, 5, 2, 9, 7])
+    assert isearch([], 2) == (2 in [1, 3, 5])
+    print("isearch tests have passed")
 
 def reduce(f, id_, a):
     print(a)
@@ -49,6 +43,28 @@ def reduce(f, id_, a):
         res = f(reduce(f, id_, a[:len(a)//2]),
                  reduce(f, id_, a[len(a)//2:]))
         return res
+
+
+# search an unordered list L for a key x using reduce
+def rsearch(L, x):
+    # turning the list into True False values (True if the item in L equals x, else false)
+    bools_vers = [e == x for e in L]
+
+    # Combining function logical OR
+    def combine(a, b):
+        return a or b
+
+    return reduce(combine, False, bools_vers)
+
+
+def test_rsearch():
+    assert rsearch([1, 3, 5, 4, 2, 9, 7], 2) == (2 in [1, 3, 5, 4, 2, 9, 7])
+    assert rsearch([1, 3, 5, 2, 9, 7], 7) == (7 in [1, 3, 5, 2, 9, 7])
+    assert rsearch([1, 3, 5, 2, 9, 7], 99) == (99 in [1, 3, 5, 2, 9, 7])
+    assert rsearch([], 2) == (2 in [1, 3, 5])
+    print("rsearch tests have passed")
+
+
 
 def ureduce(f, id_, a):
     if len(a) == 0:
@@ -230,4 +246,10 @@ def test_parens_match_dc():
     assert parens_match_dc(['(',  '(', '(', ')', ')', ')']) == True
     assert parens_match_dc(['(', '(', ')']) == False
     assert parens_match_dc(['(', 'a', ')', ')', '(']) == False
-    assert parens_match_dc([]) == True 
+    assert parens_match_dc([]) == True
+
+
+
+if __name__ == "__main__":
+    test_isearch()
+    test_rsearch()
