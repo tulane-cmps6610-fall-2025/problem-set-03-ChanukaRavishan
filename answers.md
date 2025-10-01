@@ -49,12 +49,69 @@ output in "/problem-set-03-ChanukaRavishan/Screenshot 2025-09-30 at 8.29.13 PM
 
     So total **Work: $O(n)$**
 
-    
+
 
 Span: $S(n) = max(S(n/3), S(2n/3)) + O(1)$ = $S(2n/3) +O(1)$ Recurrnece stops after k steps when $(2/3)^k \cdot n =1$. $n=(3/2)^k$ $k = log_{3/2}(n)$
 
 So **$S(n) = O(logn)$**
 
+
+- **2a.**
+
+### python implementation
+    '''
+    def dedup(A):
+        S = empty_set()
+        out = []
+        for a in A:
+            if a not in S:
+                S.add(a)
+                out.append(a)
+        return out
+
+    '''
+
+### Sparc implementation
+
+    '''
+    dedup(A):
+    // input is a sequence A of length n
+    // output is a sequence B of elements from A, should preserve order of A and cannot have duplicates
+
+    spec:
+    - For each element a in A:
+        if 
+            (a occurs earlier in A, should ignore it)
+        else 
+            (append it to B)
+    
+    - Return B
+
+    '''
+
+    **Work: $O(n)$** since performing n number of lookups with O(1) work
+    
+    **Span: $O(n)$** since performing n number of operations
+
+
+- **2b.**
+
+    Now that we have A_0, ........, A_m lists, each list having n elements.
+
+    Important hint from the question: "In the distributed setting all we care about is identifying the unique elements, without regard to the order in which they appear in the input lists" So we can do parallelization
+    
+    '''
+    multi-dedup(A0, A1, ..., Am):
+
+        // input is a m number of lists of length n
+        // output is a sequence containing each distinct element of A0∪...∪Am
+
+        spec:
+        - ∀ element x in A_0∪...∪Am, x appears in B iff x appears in at least one Ai
+        - Each distinct x appears exactly once in B
+        - Order of B is arbitrary (not required to match input order)
+
+    ''' 
 
 
 - **3b.**
