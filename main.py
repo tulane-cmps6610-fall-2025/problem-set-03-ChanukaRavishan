@@ -291,3 +291,7 @@ def test_parens_match_dc():
 if __name__ == "__main__":
     test_isearch()
     test_rsearch()
+    test_parens_match_iterative()
+    test_parens_match_scan()
+    test_parens_match_dc()
+    print("All tests passed.")
